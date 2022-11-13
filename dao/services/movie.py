@@ -6,13 +6,14 @@ class MovieService:
         self.dao = dao
 
     def get_all(self, args):
-        if "director_id" in args:
+        if args.get("director_id") is not None:
             return self.dao.get_by_director(director_id=args.get("director_id"))
-        elif "genre_id" in args:
+        elif args.get("genre_id") is not None:
             return self.dao.get_by_genre(genre_id=args.get("genre_id"))
-        elif "year" in args:
+        elif args.get("year") is not None:
             return self.dao.get_by_year(year=args.get("year"))
-        return self.dao.get_all(args)
+        else:
+            return self.dao.get_all()
 
     def get_one(self, mid):
         return self.dao.get_one(mid)

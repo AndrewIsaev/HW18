@@ -6,14 +6,14 @@ from setup_db import db
 from views.movie import movie_ns
 
 
-def create_app(config: Config):
+def create_app(config_obj):
     application = Flask(__name__)
-    application.config.from_object(config)
+    application.config.from_object(config_obj)
     configure_app(application)
     return application
 
 
-def configure_app(application: Flask):
+def configure_app(application):
     db.init_app(application)
     api = Api(application)
     api.add_namespace(movie_ns)
@@ -21,8 +21,8 @@ def configure_app(application: Flask):
     # api.add_namespace()
 
 
-app_config = Config()
-app = create_app(app_config)
+app = create_app(Config())
+app.debug = True
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=5000)

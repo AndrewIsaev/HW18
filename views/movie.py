@@ -13,7 +13,16 @@ movies_schema = MovieSchema(many=True)
 class MoviesView(Resource):
 
     def get(self):
-        return movies_schema.dump(movie_service.get_all())
+        director_id = request.args.get("director_id")
+        genre_id = request.args.get("genre_id")
+        year = request.args.get("year")
+
+        args = {
+            "director_id": director_id,
+            "genre_id": genre_id,
+            "year": year
+        }
+        return movies_schema.dump(movie_service.get_all(args))
 
     def post(self):
         req_json = request.json
@@ -32,7 +41,6 @@ class MovieView(Resource):
         movie_service.update(req_json)
         return "", 204
 
-    def delete(self,mid):
+    def delete(self, mid):
         movie_service.delete(mid)
         return "", 204
-
