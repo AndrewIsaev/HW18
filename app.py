@@ -3,6 +3,8 @@ from flask_restx import Api
 
 from config import Config
 from setup_db import db
+from views.director import director_ns
+from views.genre import genre_ns
 from views.movie import movie_ns
 
 
@@ -17,8 +19,8 @@ def configure_app(application):
     db.init_app(application)
     api = Api(application)
     api.add_namespace(movie_ns)
-    # api.add_namespace()
-    # api.add_namespace()
+    api.add_namespace(genre_ns)
+    api.add_namespace(director_ns)
 
 
 app = create_app(Config())
