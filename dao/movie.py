@@ -6,7 +6,6 @@ class MovieDAO:
         self.session = session
 
     def get_all(self):
-
         return self.session.query(Movie).all()
 
     def get_one(self, mid):
@@ -41,8 +40,6 @@ class MovieDAO:
         movie.director_id = data.get("director_id")
         self.session.add(movie)
         self.session.commit()
-
-
 
     def delete(self, mid):
         movie = self.get_one(mid)

@@ -3,7 +3,6 @@ from marshmallow import Schema, fields
 
 
 class Movie(db.Model):
-
     __tablename__ = "movie"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(500))
